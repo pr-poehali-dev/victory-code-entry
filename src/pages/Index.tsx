@@ -1,11 +1,51 @@
-// Update this page (the content is just a fallback if you fail to update the page)
 
-const Index = () => {
+import React, { useState } from "react";
+import CodeInput from "@/components/CodeInput";
+import CodeGenerator from "@/components/CodeGenerator";
+import MessageDecoder from "@/components/MessageDecoder";
+
+const Index: React.FC = () => {
+  const [decodedMessage, setDecodedMessage] = useState<string | null>(null);
+
+  const handleCodeSubmit = (code: string) => {
+    try {
+      // Простая расшифровка - декодирование base64
+      const decoded = atob(code);
+      setDecodedMessage(decoded);
+    } catch (error) {
+      setDecodedMessage("Ошибка расшифровки: Неверный формат кода");
+    }
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4 color-black text-black">Добро пожаловать!</h1>
-        <p className="text-xl text-gray-600">тут будет отображаться ваш проект</p>
+    <div className="min-h-screen bg-victory-dark victory-container">
+      <div className="container mx-auto px-4 py-8">
+        <header className="mb-8 text-center">
+          <h1 className="text-4xl md:text-5xl font-bold text-victory-red mb-2 font-victoryTitle animate-fade-in">
+            80 ЛЕТ ВЕЛИКОЙ ПОБЕДЫ
+          </h1>
+          <p className="text-white/80 text-lg">Секретные сообщения военного времени</p>
+          
+          <div className="mt-6 flex justify-center">
+            <CodeGenerator />
+          </div>
+        </header>
+
+        <main className="max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="flex items-center justify-center">
+              <CodeInput onSubmit={handleCodeSubmit} />
+            </div>
+            
+            <div className="flex items-center justify-center">
+              <MessageDecoder message={decodedMessage} />
+            </div>
+          </div>
+        </main>
+        
+        <footer className="mt-16 text-center text-white/60 text-sm">
+          <p>© 2023 — Проект в честь 80-летия Победы в Великой Отечественной войне</p>
+        </footer>
       </div>
     </div>
   );
