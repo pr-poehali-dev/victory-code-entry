@@ -24,14 +24,9 @@ const Index: React.FC = () => {
           <div className="mb-4 flex justify-center">
             <div className="relative w-48 h-48 md:w-64 md:h-64">
               <img 
-                src="/monument.svg" 
+                src="/placeholder.svg" 
                 alt="Родина-мать зовёт" 
                 className="w-full h-full object-contain animate-fade-in opacity-90" 
-                onError={(e) => {
-                  // Fallback в случае отсутствия изображения
-                  e.currentTarget.src = "/placeholder.svg";
-                  e.currentTarget.classList.add("opacity-60");
-                }}
               />
               <div className="absolute inset-0 bg-gradient-to-b from-transparent to-victory-dark opacity-30"></div>
             </div>
